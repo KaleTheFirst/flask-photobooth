@@ -10,7 +10,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')       
 
-@app.route('/capture', methods=["POST"])
+@app.route('/capture', methods=["POST","GET"])
 def capture():
     camera = picamera.PiCamera()
     #use a timestamp to save pics with unique names based on seconds since 1970.
@@ -35,7 +35,7 @@ def show_all():
     #Use glob to return an array of paths to all pics. 
     #the * wildcard will pattern match any .jpg in our images folder.
     photos=glob.glob("static/images/*.jpg")
-    return render_template('all.html', photos=photos)
+    return render_template('gallery.html', photos=photos)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
